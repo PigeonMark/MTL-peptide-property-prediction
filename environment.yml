@@ -1,0 +1,23 @@
+name: MTL-pep-prop
+channels:
+    - pytorch
+    - conda-forge
+    - nvidia
+    - defaults
+dependencies:
+    - python=3.9.16
+    - pytorch=1.12.0
+    - torchvision=0.13.0
+    - torchaudio=0.12.0
+    - pytorch-cuda=11.8
+    - lightning=2.0.1
+    - pandas=2.0.0
+    - mkl=2024.0.0  # Because of https://github.com/pytorch/pytorch/issues/123097
+    - scikit-learn=1.2.2
+    - matplotlib=3.7.1
+    - seaborn=0.12.2
+    - pip=23.0.1
+    -   pip:
+            - tape_proteins==0.5
+            - tensorflow==2.11.0
+            - smac==2.0.2

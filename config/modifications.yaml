@@ -1,0 +1,38 @@
+CHRON:
+    1: acetylation
+    4: carbamidomethylation
+    21: phosphorylation
+    26: pyrocarbamidomethylation
+    27: pyroglutamate_e
+    28: pyroglutamate_q
+    34: monomethylation
+    35: oxidation
+    36: dimethylation
+    37: trimethylation
+    64: succinylation
+    76: dimethylation_sym # Not in Chronologer but useful to distinguish between asymmetric and symmetric in the future
+    121: glyglycylation
+    737: tmt10
+    739: tmt0
+
+# Mapping from Chronologer PTM notation to UNIMOD Accession number
+Chronologer:
+    '[+57.021464]': 4
+    '[+15.994915]': 35
+    '[+79.966331]': 21
+    '[-17.0]': 26
+    '[-18.0]': 27
+    '[+42.010565]': 1
+    '[-17.026549]': 28
+    '[+57.0214635]': 4
+    '[+114.042927]': 121
+    '[+42.04695]': 37
+    '[+14.01565]': 34
+    '[+28.0313]': 36
+    '[+100.016044]': 64
+    '[+229.162932]': 737
+    '[+224.152478]': 739
+
+DCCS:
+    '(ac)': 1
+    '(ox)': 35
