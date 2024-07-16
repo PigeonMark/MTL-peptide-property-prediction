@@ -33,9 +33,13 @@ def plot_cv(results, models, metric="mae", m_name="MAE", title="", show=False):
         plt.show()
 
 
-def plot_stl_lc_curves(show=False, cached=True):
+def plot_stl_lc_curves(config="finetune_tape", show=False, cached=True):
     for log_t, t in zip(["rt", "ccs"], ["iRT", "CCS"]):
-        metric_dict = get_stl_lc_metrics(f"stl_{log_t}_lc", cached=cached)
+        if config == "finetune_tape":
+            metric_dict = get_stl_lc_metrics(f"stl_{log_t}_lc", cached=cached)
+        elif config == "pretrain_lc":
+            metric_dict = get_stl_lc_metrics(f"stl_finetune_mtl_pt_lc_{log_t}", cached=cached)
+
         for metric, m_name in zip(["mae", "d95", "r"], ["MAE", "Δ95%", "R"]):
             data = {f"{t}_frac": [], metric: []}
             for t_frac, result in metric_dict.items():
@@ -48,15 +52,25 @@ def plot_stl_lc_curves(show=False, cached=True):
             plt.figure(figsize=(4, 3))
             sns.lineplot(data=data, x=f"{t}_frac", y=metric)
 
-            plt.ylabel(m_name)
-            plt.xlabel(f"{t} data fraction (%)")
+            if config == "finetune_tape":
+                plt.ylabel(m_name)
+                plt.xlabel(f"{t} data fraction (%)")
+            else:
+                plt.ylabel(f"Test {t} {m_name}")
+                plt.xlabel(f"Pretrain data fraction (%)")
+
             sns.despine()
             plt.tight_layout()
 
             os.makedirs("plots/lc", exist_ok=True)
-            plt.savefig(
-                os.path.join("plots", "lc", f"stl_{t}_{metric}"), dpi=600
-            )
+            if config == "finetune_tape":
+                plt.savefig(
+                    os.path.join("plots", "lc", f"stl_{t}_{metric}.png"), dpi=600
+                )
+            elif config == "pretrain_lc":
+                plt.savefig(
+                    os.path.join("plots", "lc", f"stl_pt_lc_{t}_{metric}.png"), dpi=600
+                )
             if show:
                 plt.show()
 
@@ -144,3 +158,4 @@ if __name__ == "__main__":
     plot_5fold_cv_pt_comparison()
     plot_5fold_cv_mtl_comparison()
     plot_stl_lc_curves()
+    plot_stl_lc_curves("pretrain_lc")

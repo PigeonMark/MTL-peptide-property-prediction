@@ -8,3 +8,4 @@ lightning_logs/
 plots/
 prosit_results/
 smac3_output/
+*.zip

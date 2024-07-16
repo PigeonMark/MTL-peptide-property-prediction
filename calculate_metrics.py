@@ -74,7 +74,7 @@ def get_stl_lc_metrics(config, cached=True):
     log_df = get_log_df(config_filter(config, exact=False), cached=cached)
     runs = log_df["run"].unique()
     metric_dict = {}
-    for t_frac in ["05", "10", "25", "50", "75", "100"]:
+    for t_frac in ["00", "05", "10", "25", "50", "75", "100"]:
         possible_runs = [r for r in runs if f"{config}_{t_frac}," in r]
         if len(possible_runs) > 1:
             print(
